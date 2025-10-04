@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <functional>
+#include <stdexcept>
+
+using namespace std;
+
+float suma(float a, float b) { return a + b; }
+float resta(float a, float b) { return a - b; }
+float multiplicacion(float a, float b) { return a * b; }
+float division(float a, float b) { 
+    if (b == 0) throw invalid_argument("Error: Division por cero");
+    return a / b; 
+}
+
+int main(int argc, char* argv[]) {
+    if (argc != 4) {
+        cerr << "Uso: " << argv[0] << " <operando1> <operador> <operando2>" << endl;
+        cerr << "Operadores validos: +, -, *, x, /" << endl;
+        return 1;
+    }
+    
+    try {
+        float num1 = stof(argv[1]);
+        float num2 = stof(argv[3]);
+        string operador = argv[2];
+        
+        unordered_map<string, function<float(float, float)>> operaciones = {
+            {"+", suma},
+            {"-", resta},
+            {"*", multiplicacion},
+            {"x", multiplicacion},
+            {"/", division}
+        };
+        
+        if (operaciones.find(operador) == operaciones.end()) {
+            throw invalid_argument("Error: Operador no valido");
+        }
+        
+        float resultado = operaciones[operador](num1, num2);
+        cout << num1 << " " << operador << " " << num2 << " = " << resultado << endl;
+        
+    } catch (const invalid_argument& e) {
+        cerr << e.what() << endl;
+        return 1;
+    } catch (const out_of_range& e) {
+        cerr << "Error: Numero fuera de rango" << endl;
+        return 1;
+    } catch (...) {
+        cerr << "Error inesperado" << endl;
+        return 1;
+    }
+    
+    return 0;
+}
