@@ -5,12 +5,12 @@ Este repositorio contiene las soluciones a los ejercicios de la práctica 1.
 ## Estructura del Proyecto
 
 Corte 2 - practica 1/
-├── leetcode/
-│ ├── two_sum.cpp
-│ └── palindrome_number.cpp
-├── calculadora/
-│ └── calculadora.cpp
-└── README.md
+1. leetcode/
+1.a two_sum.cpp
+1.b palindrome_number.cpp
+2. calculadora/
+2.a calculadora.cpp
+3. README.md
 
 
 ## 🧮 Ejercicios Incluidos
